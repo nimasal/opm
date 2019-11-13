@@ -6,7 +6,7 @@ m2 = 0.0597;
 L = [0.75, 1.28, 2.01];
 for i= 1:3
 
- files = dir('operatiom_momentum/1dim/m1_*_d1.tsv');
+ files = dir('operation_momentum/1dim/m1_*_d1.tsv');
  fname = fullfile('operation_momentum/1dim/',files(i).name);
  fiter = dlmread(fname);
  fiter(:,1) = [];
