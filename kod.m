@@ -23,7 +23,7 @@ for i = 1:M-1
         V(i,2) = m1*(T{1,j}(i+1,4)-T{1,j}(i,4));      
 end
     R(:,1) = V(:,1)+V(:,2);
-    
+    %hejhej
    figure(j);
    hold on;
    index = round((L(j)-t(1))*100,1)
