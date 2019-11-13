@@ -15,7 +15,7 @@ s = 0;
 for j = 1:3
     [M,N] = size(T{1,j});
     t = transpose(linspace(T{1,j}(1,1),T{1,j}(M,1),M));
-    V = zeros(M,2); % sparar magnituden av lägesförändringen
+    V = zeros(M,2); 
     R = zeros(M,1);
 for i = 1:M-1
     
