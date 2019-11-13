@@ -3,8 +3,8 @@
  m2 = 0.0597;
  L = [0.75, 1.28, 2.01];
 for i= 1:3
- files = dir('/chalmers/users/filwes/Downloads/1dim/*.tsv');
- fname = files(i).name;
+ files = dir('/chalmers/users/filwes/Downloads/1dim/m1_*_d1.tsv');
+ fname = fullfile('/chalmers/users/filwes/Downloads/1dim/',files(i).name);
  fiter = dlmread(fname);
  fiter(:,1) = [];
  fiter(:,7) = [];
@@ -23,7 +23,6 @@ for i = 1:M-1
         V(i,2) = m1*(T{1,j}(i+1,4)-T{1,j}(i,4));      
 end
     R(:,1) = V(:,1)+V(:,2);
-    %hejhej
    figure(j);
    hold on;
    index = round((L(j)-t(1))*100,1)
