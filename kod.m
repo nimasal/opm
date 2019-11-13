@@ -1,3 +1,4 @@
+
  T = cell(1,3);
  m1 = 0.062;
  m2 = m1;
@@ -5,8 +6,9 @@
  e = zeros(1,3);
  Vi = zeros(1,3);
 for i= 1:3
- files = dir('/chalmers/users/filwes/Downloads/1dim/m1_*_d1.tsv');
- fname = fullfile('/chalmers/users/filwes/Downloads/1dim/',files(i).name);
+
+ files = dir('operation_momentum/1dim/m1_*_d1.tsv');
+ fname = fullfile('operation_momentum/1dim/',files(i).name);
  fiter = dlmread(fname);
  fiter(:,1) = []; fiter(:,7) = []; fiter(:,4) =  [];
  T{1,i} = fiter;
@@ -27,6 +29,7 @@ end
    Vi(1,j) = V(index-1,1)./m1;
    R(end-3:1:end,:) = [];
    t(end-3:1:end,:) = [];
+
    figure(j);
    hold on;
    plot(t,R)
