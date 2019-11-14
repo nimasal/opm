@@ -14,10 +14,14 @@ for i= 1:r
  fname = fullfile(files(i).folder,files(i).name);
  f = files(i).name
  fiter = dlmread(fname);
+ if r == 14
  fiter(:,[1,5,8,11,14]) = [];
  T{1,i} = fiter;
+ else 
+ fiter(:,[4,7,10,13]) = [];
+ T{1,i} = fiter;
  f = f(1:2);
- 
+ end
  P = strcmp(f,'d1');
  if P == 1
      m(i,1) = 0.06;
@@ -67,7 +71,7 @@ for j = 1:r
     RMY(l,1) = m(1,1)*(V(l,2)+V(l,4));
     end
      figure(j)
-     plot(t,E);
+     plot(t,W);
      xlabel([files(j).name]);
      grid;
     
