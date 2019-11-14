@@ -1,24 +1,40 @@
 clc
 cla
 clf
-format short
- m = 0.001.*[97,97,69,69];
+% Aluminium: 20mm x(60mm - 50mm- 40mm- ) Nylon: 82 Mässing:
+ r = 0.001.*[40, 50, 60];
  %V med hastigheter
  % W med rotationshastigheter
- files = dir('/chalmers/users/filwes/MatLab/Projekt/opm/operation_momentum/2dim/*tsv');
+ files = dir('/chalmers/users/filwes/MatLab/Projekt/opm/operation_momentum/2dim2/*tsv');
  [r,B] = size(files);
  T = cell(1,r);
+ P = 0;
+ m = zeros(r,1);
 for i= 1:r
  fname = fullfile(files(i).folder,files(i).name);
+ f = files(i).name
  fiter = dlmread(fname);
  fiter(:,[1,5,8,11,14]) = [];
  T{1,i} = fiter;
+ f = f(1:2);
+ 
+ P = strcmp(f,'d1');
+ if P == 1
+     m(i,1) = 0.06;
+ end
+ P = strcmp(f,'d2');
+ if P == 1
+     m(i,1) = 0.120;
+ end
+ P = strcmp(f,'d3');
+ if P == 1
+     m(i,1) = 0.180;
+ end
 end
 for j = 1:r
     [M,N] = size(T{1,j});
-    t = transpose(linspace(T{1,j}(1,1),T{1,j}(M,1),M));
-    V = zeros(M,4); R = zeros(M,4); Vtot = zeros(1,2); W = zeros(M,2); RMX = zeros(M,1); 
-    Vtot = zeros(M,2);E = zeros(M,1); RMY = zeros(M,1);
+    t = transpose((0:0.01:(M-1)*0.01)); % 0.01s i tidsteg
+    V = zeros(M,4); R = zeros(M,4); W = zeros(M,2); RMX = zeros(M,1); RMY = zeros(M,1); Vtot = zeros(M,2); E = zeros(M,1); 
     for i = 1:M-1
     % Translationshastighet för objekt 1
         V(i,1) = (T{1,j}(i+1,2)-T{1,j}(i,2))/10;
@@ -29,7 +45,6 @@ for j = 1:r
         V(i,4) = (T{1,j}(i+1,7)-T{1,j}(i,7))/10;    
         Vtot(i,2) = sqrt(V(i,3)^2+V(i,4)^2);
     % Vill finna rotationshastighet för objekt 3,4 (kolonn 4,5 - 8,9)
-    % Ta ortsvektor för objekter minus det för centrum - spara i R
     % Vektorn från centrum till kant för objekt 1
         R(i,1) = T{1,j}(i,4)-T{1,j}(i,2);
         R(i,2) = T{1,j}(i,5)-T{1,j}(i,3);
